@@ -1,0 +1,280 @@
+/* =============================================================================
+   HomePage Pop Up — Frontend Popup Styles
+   Author: Sajid Khan
+   Version: 1.0.0
+   ============================================================================= */
+
+/* ── CSS Custom Properties ───────────────────────────────────────────────────── */
+:root {
+  --hpp-overlay-bg:      rgba(0, 0, 0, 0.75);
+  --hpp-popup-bg:        #ffffff;
+  --hpp-popup-radius:    20px;
+  --hpp-popup-shadow:    0 32px 80px rgba(0, 0, 0, 0.45);
+  --hpp-popup-max-w:     560px;
+  --hpp-popup-padding:   2rem;
+
+  --hpp-cta-bg:          linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+  --hpp-cta-bg-hover:    linear-gradient(135deg, #6d28d9 0%, #4338ca 100%);
+  --hpp-cta-color:       #ffffff;
+  --hpp-cta-radius:      50px;
+  --hpp-cta-font-size:   1.05rem;
+  --hpp-cta-shadow:      0 8px 24px rgba(79, 70, 229, 0.45);
+  --hpp-cta-shadow-h:    0 12px 32px rgba(79, 70, 229, 0.6);
+
+  --hpp-close-size:      36px;
+  --hpp-close-bg:        rgba(255, 255, 255, 0.15);
+  --hpp-close-bg-hover:  rgba(255, 255, 255, 0.35);
+  --hpp-close-color:     #1e1b4b;
+
+  --hpp-transition:      0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  --hpp-fade-speed:      0.35s ease;
+
+  --hpp-z-index:         999999;
+}
+
+/* ── Overlay ─────────────────────────────────────────────────────────────────── */
+.hpp-overlay {
+  position:   fixed;
+  inset:      0;
+  z-index:    var(--hpp-z-index);
+  background: var(--hpp-overlay-bg);
+  display:    flex;
+  align-items: center;
+  justify-content: center;
+  padding:    1rem;
+
+  /* hidden by default */
+  opacity:    0;
+  visibility: hidden;
+  transition: opacity var(--hpp-fade-speed), visibility var(--hpp-fade-speed);
+
+  /* backdrop blur for browsers that support it */
+  -webkit-backdrop-filter: blur(6px);
+          backdrop-filter: blur(6px);
+}
+
+.hpp-overlay.hpp-overlay--visible {
+  opacity:    1;
+  visibility: visible;
+}
+
+/* ── Popup Card ──────────────────────────────────────────────────────────────── */
+.hpp-popup {
+  position:         relative;
+  background:       var(--hpp-popup-bg);
+  border-radius:    var(--hpp-popup-radius);
+  box-shadow:       var(--hpp-popup-shadow);
+  width:            100%;
+  max-width:        var(--hpp-popup-max-w);
+  max-height:       90vh;
+  overflow:         hidden;
+  display:          flex;
+  flex-direction:   column;
+
+  /* entry animation */
+  transform:        scale(0.85) translateY(20px);
+  transition:       transform var(--hpp-transition), opacity var(--hpp-transition);
+  opacity:          0;
+}
+
+.hpp-overlay.hpp-overlay--visible .hpp-popup {
+  transform: scale(1) translateY(0);
+  opacity:   1;
+}
+
+/* ── Close Button ────────────────────────────────────────────────────────────── */
+.hpp-popup__close {
+  position:         absolute;
+  top:              14px;
+  right:            14px;
+  z-index:          10;
+  width:            var(--hpp-close-size);
+  height:           var(--hpp-close-size);
+  border:           none;
+  border-radius:    50%;
+  background:       #f3f4f6;
+  color:            var(--hpp-close-color);
+  font-size:        1.35rem;
+  line-height:      1;
+  cursor:           pointer;
+  display:          flex;
+  align-items:      center;
+  justify-content:  center;
+  transition:       background 0.2s, transform 0.2s, box-shadow 0.2s;
+  box-shadow:       0 2px 8px rgba(0,0,0,0.12);
+}
+
+.hpp-popup__close:hover,
+.hpp-popup__close:focus-visible {
+  background:  #e5e7eb;
+  transform:   scale(1.12) rotate(90deg);
+  box-shadow:  0 4px 16px rgba(0,0,0,0.18);
+  outline:     none;
+}
+
+/* ── Image Wrapper ───────────────────────────────────────────────────────────── */
+.hpp-popup__image-wrap {
+  width:         100%;
+  overflow:      hidden;
+  max-height:    55vh;
+  flex-shrink:   0;
+  background:    #f9fafb;
+  display:       flex;
+  align-items:   center;
+  justify-content: center;
+}
+
+/* Clickable image link — fills the whole wrap */
+.hpp-popup__image-link {
+  display:  block;
+  width:    100%;
+  height:   100%;
+  overflow: hidden;
+  cursor:   pointer;
+  /* Remove default link underline / outline artifacts */
+  text-decoration: none;
+  line-height: 0;
+}
+
+.hpp-popup__image-link:focus-visible {
+  outline:        3px solid #4f46e5;
+  outline-offset: -3px;
+}
+
+.hpp-popup__image {
+  width:         100%;
+  height:        100%;
+  object-fit:    cover;
+  object-position: center;
+  display:       block;
+  transition:    transform 0.4s ease;
+}
+
+.hpp-popup__image-wrap:hover .hpp-popup__image {
+  transform: scale(1.03);
+}
+
+/* ── Footer / CTA ────────────────────────────────────────────────────────────── */
+.hpp-popup__footer {
+  padding:          var(--hpp-popup-padding);
+  display:          flex;
+  justify-content:  center;
+  align-items:      center;
+  background:       #ffffff;
+  border-top:       1px solid #f3f4f6;
+}
+
+.hpp-popup__cta {
+  display:          inline-flex;
+  align-items:      center;
+  justify-content:  center;
+  gap:              0.5rem;
+  padding:          0.9rem 2.5rem;
+  background:       var(--hpp-cta-bg);
+  color:            var(--hpp-cta-color);
+  font-size:        var(--hpp-cta-font-size);
+  font-weight:      700;
+  font-family:      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  letter-spacing:   0.025em;
+  text-decoration:  none;
+  border-radius:    var(--hpp-cta-radius);
+  box-shadow:       var(--hpp-cta-shadow);
+  transition:       background 0.25s, box-shadow 0.25s, transform 0.2s;
+  white-space:      nowrap;
+  cursor:           pointer;
+  border:           none;
+  text-transform:   uppercase;
+}
+
+.hpp-popup__cta::before {
+  content: "👉";
+  display: inline-block;
+  transition: transform 0.2s;
+}
+
+.hpp-popup__cta:hover,
+.hpp-popup__cta:focus-visible {
+  background:  var(--hpp-cta-bg-hover);
+  box-shadow:  var(--hpp-cta-shadow-h);
+  transform:   translateY(-2px);
+  outline:     none;
+  color:       #ffffff;
+  text-decoration: none;
+}
+
+.hpp-popup__cta:hover::before {
+  transform: translateX(4px);
+}
+
+.hpp-popup__cta:active {
+  transform: translateY(0);
+}
+
+/* ── Decorative gradient accent on popup top ─────────────────────────────────── */
+.hpp-popup::before {
+  content:    "";
+  display:    block;
+  height:     4px;
+  width:      100%;
+  background: linear-gradient(90deg, #7c3aed, #4f46e5, #06b6d4);
+  position:   absolute;
+  top:        0;
+  left:       0;
+  z-index:    5;
+}
+
+/* ── No-image fallback (only CTA shown) ─────────────────────────────────────── */
+.hpp-popup:not(:has(.hpp-popup__image-wrap)) .hpp-popup__footer {
+  padding: 3rem 2rem;
+}
+
+/* ── Accessibility — reduce motion ───────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .hpp-overlay,
+  .hpp-popup,
+  .hpp-popup__close,
+  .hpp-popup__cta,
+  .hpp-popup__image {
+    transition: none;
+    animation:  none;
+  }
+}
+
+/* ── Mobile (≤ 480px) ────────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .hpp-overlay {
+    padding:    0.5rem;
+    align-items: flex-end;
+  }
+
+  .hpp-popup {
+    border-radius: 20px 20px 0 0;
+    max-height:    92vh;
+    max-width:     100%;
+  }
+
+  .hpp-popup__image-wrap {
+    max-height: 45vh;
+  }
+
+  .hpp-popup__footer {
+    padding: 1.25rem 1rem;
+  }
+
+  .hpp-popup__cta {
+    width:      100%;
+    padding:    0.85rem 1.5rem;
+    font-size:  1rem;
+  }
+}
+
+/* ── Tablet (481px – 768px) ──────────────────────────────────────────────────── */
+@media (min-width: 481px) and (max-width: 768px) {
+  :root {
+    --hpp-popup-max-w: 480px;
+  }
+
+  .hpp-popup__image-wrap {
+    max-height: 48vh;
+  }
+}

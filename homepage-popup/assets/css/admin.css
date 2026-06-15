@@ -1,0 +1,260 @@
+/* =============================================================================
+   HomePage Pop Up — Admin Settings Page Styles
+   Author: Sajid Khan
+   Version: 1.0.0
+   ============================================================================= */
+
+/* ── Wrap / Layout ───────────────────────────────────────────────────────────── */
+.hpp-settings-wrap {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, sans-serif;
+}
+
+/* ── Admin Header ────────────────────────────────────────────────────────────── */
+.hpp-admin-header {
+  display:         flex;
+  align-items:     center;
+  justify-content: space-between;
+  background:      linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  border-radius:   16px;
+  padding:         1.5rem 2rem;
+  margin-bottom:   1.75rem;
+  color:           #fff;
+  box-shadow:      0 8px 32px rgba(79, 70, 229, 0.35);
+}
+
+.hpp-admin-header-inner {
+  display:     flex;
+  align-items: center;
+  gap:         1rem;
+}
+
+.hpp-logo-icon {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+.hpp-admin-header h1 {
+  margin:      0;
+  padding:     0;
+  font-size:   1.6rem;
+  font-weight: 700;
+  color:       #fff;
+  line-height: 1.2;
+}
+
+.hpp-admin-header p {
+  margin:    0.25rem 0 0;
+  opacity:   0.85;
+  font-size: 0.9rem;
+  color:     #fff;
+}
+
+.hpp-version-badge {
+  background:    rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
+  padding:       0.3rem 0.85rem;
+  font-size:     0.78rem;
+  font-weight:   600;
+  color:         #fff;
+  border:        1px solid rgba(255,255,255,0.3);
+  white-space:   nowrap;
+}
+
+/* ── Two-column layout ───────────────────────────────────────────────────────── */
+.hpp-settings-container {
+  display:   grid;
+  grid-template-columns: 1fr 280px;
+  gap:       2rem;
+  align-items: start;
+}
+
+@media (max-width: 960px) {
+  .hpp-settings-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Main form styles ────────────────────────────────────────────────────────── */
+.hpp-settings-wrap .form-table {
+  background:    #fff;
+  border-radius: 12px;
+  box-shadow:    0 2px 12px rgba(0,0,0,0.07);
+  padding:       1.25rem;
+  margin-top:    0;
+}
+
+.hpp-settings-wrap .form-table th {
+  font-weight: 600;
+  color:       #1e1b4b;
+  padding:     1rem 1.25rem;
+}
+
+.hpp-settings-wrap .form-table td {
+  padding: 0.85rem 1.25rem;
+}
+
+.hpp-settings-wrap h2 {
+  font-size:   1.05rem;
+  font-weight: 700;
+  color:       #4f46e5;
+  margin:      1.5rem 0 0.5rem;
+  padding:     0;
+  border-bottom: 2px solid #ede9fe;
+  padding-bottom: 0.4rem;
+}
+
+/* ── Toggle switch ───────────────────────────────────────────────────────────── */
+.hpp-toggle {
+  display:     flex;
+  align-items: center;
+  gap:         0.75rem;
+  cursor:      pointer;
+  user-select: none;
+}
+
+.hpp-toggle input[type="checkbox"] {
+  display: none;
+}
+
+.hpp-toggle-slider {
+  position:      relative;
+  width:         48px;
+  height:        26px;
+  background:    #d1d5db;
+  border-radius: 50px;
+  transition:    background 0.25s;
+  flex-shrink:   0;
+}
+
+.hpp-toggle-slider::after {
+  content:       "";
+  position:      absolute;
+  top:           3px;
+  left:          3px;
+  width:         20px;
+  height:        20px;
+  background:    #fff;
+  border-radius: 50%;
+  box-shadow:    0 2px 6px rgba(0,0,0,0.15);
+  transition:    transform 0.25s;
+}
+
+.hpp-toggle input:checked + .hpp-toggle-slider {
+  background: #4f46e5;
+}
+
+.hpp-toggle input:checked + .hpp-toggle-slider::after {
+  transform: translateX(22px);
+}
+
+.hpp-toggle-label {
+  font-size: 0.9rem;
+  color:     #374151;
+}
+
+/* ── Image field ─────────────────────────────────────────────────────────────── */
+.hpp-image-field {
+  display:        flex;
+  flex-direction: column;
+  gap:            0.75rem;
+  align-items:    flex-start;
+}
+
+.hpp-image-preview {
+  width:         220px;
+  height:        140px;
+  border:        2px dashed #d1d5db;
+  border-radius: 10px;
+  background:    #f9fafb;
+  display:       flex;
+  align-items:   center;
+  justify-content: center;
+  overflow:      hidden;
+  transition:    border-color 0.2s;
+}
+
+.hpp-image-preview:hover {
+  border-color: #4f46e5;
+}
+
+.hpp-image-preview img {
+  width:      100%;
+  height:     100%;
+  object-fit: cover;
+  display:    block;
+}
+
+.hpp-image-field .button {
+  margin-top: 0;
+}
+
+/* ── Save button ─────────────────────────────────────────────────────────────── */
+.hpp-save-btn.button-primary {
+  background:    linear-gradient(135deg, #4f46e5, #7c3aed) !important;
+  border-color:  #4f46e5 !important;
+  border-radius: 8px !important;
+  padding:       0.6rem 2rem !important;
+  font-weight:   700 !important;
+  font-size:     0.95rem !important;
+  box-shadow:    0 4px 16px rgba(79,70,229,0.35) !important;
+  transition:    box-shadow 0.2s, transform 0.15s !important;
+  height:        auto !important;
+}
+
+.hpp-save-btn.button-primary:hover {
+  box-shadow: 0 6px 24px rgba(79,70,229,0.5) !important;
+  transform:  translateY(-1px);
+}
+
+/* ── Sidebar cards ───────────────────────────────────────────────────────────── */
+.hpp-sidebar {
+  display:        flex;
+  flex-direction: column;
+  gap:            1rem;
+}
+
+.hpp-sidebar-card {
+  background:    #fff;
+  border-radius: 12px;
+  padding:       1.25rem;
+  box-shadow:    0 2px 12px rgba(0,0,0,0.07);
+}
+
+.hpp-sidebar-card h3 {
+  margin:      0 0 0.75rem;
+  font-size:   0.95rem;
+  font-weight: 700;
+  color:       #1e1b4b;
+}
+
+.hpp-sidebar-card p,
+.hpp-sidebar-card ul {
+  margin:    0;
+  font-size: 0.85rem;
+  color:     #6b7280;
+}
+
+.hpp-sidebar-card ul {
+  padding-left: 1.15rem;
+}
+
+.hpp-sidebar-card ul li {
+  margin-bottom: 0.4rem;
+  line-height:   1.5;
+}
+
+.hpp-sidebar-card ul li:last-child {
+  margin-bottom: 0;
+}
+
+.hpp-credit-card {
+  text-align:  center;
+  font-size:   0.82rem;
+  color:       #9ca3af;
+  background:  #faf5ff;
+  border:      1px solid #ede9fe;
+}
+
+.hpp-credit-card strong {
+  color: #4f46e5;
+}
