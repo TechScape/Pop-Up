@@ -10,7 +10,7 @@
   --hpp-popup-bg:        #ffffff;
   --hpp-popup-radius:    20px;
   --hpp-popup-shadow:    0 32px 80px rgba(0, 0, 0, 0.45);
-  --hpp-popup-max-w:     560px;
+  --hpp-popup-max-w:     480px;
   --hpp-popup-padding:   2rem;
 
   --hpp-cta-bg:          linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
@@ -66,7 +66,7 @@
   box-shadow:       var(--hpp-popup-shadow);
   width:            100%;
   max-width:        var(--hpp-popup-max-w);
-  max-height:       90vh;
+  max-height:       95vh;
   overflow:         hidden;
   display:          flex;
   flex-direction:   column;
@@ -114,26 +114,23 @@
 
 /* ── Image Wrapper ───────────────────────────────────────────────────────────── */
 .hpp-popup__image-wrap {
-  width:         100%;
-  overflow:      hidden;
-  max-height:    55vh;
-  flex-shrink:   0;
-  background:    #f9fafb;
-  display:       flex;
-  align-items:   center;
+  width:           100%;
+  /* No fixed max-height — let the portrait poster breathe */
+  flex-shrink:     0;
+  background:      #ffffff;
+  display:         flex;
+  align-items:     center;
   justify-content: center;
+  overflow:        hidden;
 }
 
 /* Clickable image link — fills the whole wrap */
 .hpp-popup__image-link {
-  display:  block;
-  width:    100%;
-  height:   100%;
-  overflow: hidden;
-  cursor:   pointer;
-  /* Remove default link underline / outline artifacts */
+  display:         block;
+  width:           100%;
+  line-height:     0;        /* removes phantom whitespace gap */
   text-decoration: none;
-  line-height: 0;
+  cursor:          pointer;
 }
 
 .hpp-popup__image-link:focus-visible {
@@ -141,17 +138,19 @@
   outline-offset: -3px;
 }
 
+/* Portrait poster: show the FULL image, no cropping */
 .hpp-popup__image {
-  width:         100%;
-  height:        100%;
-  object-fit:    cover;
-  object-position: center;
-  display:       block;
-  transition:    transform 0.4s ease;
+  width:      100%;
+  height:     auto;          /* natural aspect ratio */
+  display:    block;
+  object-fit: contain;
+  /* Subtle brightness lift on hover so user knows it's clickable */
+  transition: filter 0.3s ease;
 }
 
-.hpp-popup__image-wrap:hover .hpp-popup__image {
-  transform: scale(1.03);
+.hpp-popup__image-link:hover .hpp-popup__image,
+.hpp-popup__image-link:focus-visible .hpp-popup__image {
+  filter: brightness(1.05);
 }
 
 /* ── Footer / CTA ────────────────────────────────────────────────────────────── */
@@ -254,7 +253,8 @@
   }
 
   .hpp-popup__image-wrap {
-    max-height: 45vh;
+    /* Portrait posters scroll naturally on mobile */
+    max-height: none;
   }
 
   .hpp-popup__footer {
@@ -271,10 +271,6 @@
 /* ── Tablet (481px – 768px) ──────────────────────────────────────────────────── */
 @media (min-width: 481px) and (max-width: 768px) {
   :root {
-    --hpp-popup-max-w: 480px;
-  }
-
-  .hpp-popup__image-wrap {
-    max-height: 48vh;
+    --hpp-popup-max-w: 440px;
   }
 }
