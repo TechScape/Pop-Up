@@ -242,23 +242,29 @@
 /* ── Mobile (≤ 480px) ────────────────────────────────────────────────────────── */
 @media (max-width: 480px) {
   .hpp-overlay {
-    padding:    0.5rem;
-    align-items: flex-end;
+    padding:     1rem;
+    align-items: center;   /* centered vertically on mobile */
+    justify-content: center;
   }
 
   .hpp-popup {
-    border-radius: 20px 20px 0 0;
-    max-height:    92vh;
-    max-width:     100%;
+    border-radius: var(--hpp-popup-radius); /* full rounded corners on all sides */
+    max-height:    90vh;
+    max-width:     92vw;                   /* slight side margins so it doesn't touch screen edges */
+    overflow-y:    auto;                   /* tall portrait posters scroll inside popup */
+    -webkit-overflow-scrolling: touch;     /* smooth momentum scroll on iOS */
   }
 
   .hpp-popup__image-wrap {
-    /* Portrait posters scroll naturally on mobile */
-    max-height: none;
+    max-height: none; /* show full poster, let popup scroll */
   }
 
   .hpp-popup__footer {
-    padding: 1.25rem 1rem;
+    padding:    1.25rem 1rem;
+    position:   sticky;   /* CTA button stays visible while scrolling the image */
+    bottom:     0;
+    background: #ffffff;
+    z-index:    2;
   }
 
   .hpp-popup__cta {
